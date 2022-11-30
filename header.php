@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style_.css">
+    <link rel="stylesheet" href="style_header.css">
     <title>header</title>
 </head>
 <body>
@@ -20,13 +20,13 @@
             <nav class="nav">    
                 <div class="row">
                     <div class="col">
-                        <a href="">Apartamentos</a>
-                        <a href="">Casas</a>
-                        <a href="">Terrenos</a>
-                        <button onclick="location.href=''">
+                        <a href="./apartamentos.php">Apartamentos</a>
+                        <a href="./casas.php">Casas</a>
+                        <a href="./terrenos.php">Terrenos</a>
+                        <button onclick="location.href='./perfil.php'">
                             <img src="assets/perfil.svg" alt="X">
                         </button>
-                        <button onclick="location.href=''">
+                        <button onclick="location.href='./carrito.php'">
                             <img src="assets/carrito.svg" alt="X">
                         </button>
                     </div>
