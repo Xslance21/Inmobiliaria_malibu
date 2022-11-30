@@ -1,15 +1,12 @@
-div#container{
-    /* padding-right: 10%; */
-}
-
 div#Login{
     border: solid 2px Black;
     border-radius: 20px;
-    /* height: 100%;
-    width: 50%; */
     padding-right: 0%;
     border-color: #ffe8d6;
     background-color: #ffe8d6;
-    /* margin-left: 25%; */
 }
 
+.btn{
+    background-color: #ff971d;
+    border-color: #ff971d;
+}
