@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="">
+        <form action="./validación_registro.php" method="post">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
                     <input class="form-control" type="text" placeholder="Username" name="username">
@@ -18,26 +18,26 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Password" name="password">
+                    <input class="form-control" type="password" placeholder="Password" name="password" id="pass">
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Confirm_Password" onchange="confirmacion()">
+                    <input class="form-control" type="password" placeholder="Confirm_Password" onchange="confirmacion()" id="pass_2"> 
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Email">
+                    <input class="form-control" type="text" placeholder="Email" name="email">
                 </div>    
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Cellphone">
+                    <input class="form-control" type="text" placeholder="Cellphone" name="cellphone">
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Name">
+                    <input class="form-control" type="text" placeholder="Name" name="name">
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Document">
+                    <input class="form-control" type="text" placeholder="Document" name="document">
                 </div>
             </div>
             <div>
@@ -48,7 +48,13 @@
     </div>
     <script>
         function confirmacion(){
-            
+            let pass_1 = document.querySelector("input#pass").value;
+            let pass_2 = document.querySelector("input#pass_2").value;
+
+            if(pass_1 != pass_2){
+                document.getElementById("pass_2").value= "";
+                alert('La contraseña no coincide');
+            }
         }
     </script>
 
