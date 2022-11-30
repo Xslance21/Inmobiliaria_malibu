@@ -14,8 +14,8 @@
         $validacion_nombre = false;
         $validacion_pass = false;
 
-        htmlentities($username);
-        htmlentities($password);
+        $username = htmlentities($username);
+        $password = htmlentities($password);
 
         $consulta = $connection->prepare("SELECT * FROM `users`;");
         $consulta->execute();
@@ -26,12 +26,12 @@
             if($x_values['username'] == $username){
                 $validacion_nombre = true;
             }
-            if($x_values['pass'] == $password){
+            if($x_values['password'] == $password){
                 $validacion_pass = true;
             }
         }
 
-        if($validacion_nombre and $validacion_pass){
+        if($validacion_nombre == true and $validacion_pass == true){
             $_SESSION['username'] = $username;
             $_SESSION['pass'] = $password;
             header("Location:landing_page.php");
