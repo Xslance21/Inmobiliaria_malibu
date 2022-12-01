@@ -40,6 +40,8 @@
             $resultado = $consulta->execute([$name,$document,$cellphone,$email,$username,$password]);
 
             if($resultado){
+                $_SESSION['username'] = $username;
+                $_SESSION['pass'] = $password;
                 echo ("<script> alert('Se ha registrado correctamente!');
                 window.location.href='landing_page.php';</script>");
             }else{
