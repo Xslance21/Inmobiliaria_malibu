@@ -21,6 +21,30 @@
         session_unset();
         session_destroy();
     }
+    if(isset($_POST['propiedad'])){
+        switch($_POST['propiedad']){
+            case "casas":
+                $_SESSION['type'] = 4;
+                break;
+            case "apartamento":
+                $_SESSION['type'] = 5;
+                break;
+            case "terrenos":
+                $_SESSION['type'] = 6;
+                break;
+            default:
+                echo "nada";
+                break; 
+        }
+    }else{
+        $_SESSION['type'] = 4;
+    }
+
+    if(isset($_SESSION['type'])){
+        $consulta = $connection->prepare("SELECT `users`.`username`,`properties`.`price`,`properties`.`image_1`,`neighborhood`.`neighborhood`,`properties`.`id` FROM `properties` INNER JOIN `users` ON `properties`.`id_users` = `users`.`id` INNER JOIN `neighborhood` ON `properties`.`id_neighborhood` = `neighborhood`.`id` WHERE `id_type_properties` = ?");
+        $consulta->execute([$_SESSION['type']]);
+        $propiedades = $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +58,30 @@
     <?php
         require("./header.php");
     ?>
+    <div class="container">
+        <?php
+            
+            foreach($propiedades as $x => $x_values){
+                echo 
+                "
+                    <div class="."row".">
+                        <div class="."col".">
+                            <img class="."img-fluid"." src=".$x_values['image_1']." alt="."Null".">
+                        </div>
+                        <div class="."col".">
+                            <h2>Propietario: ".$x_values['username']."</h2>
+                            <h2>Ubicación: ".$x_values['neighborhood']."</h2>
+                            <h2>Precio: \$".$x_values['price']."</h2>
+                            <form action="."./casas.php"." method="."POST".">
+                                <input name="."id_propiedad"." value=".$x_values['id']." hidden>
+                                <button class="."btn btn-primary"." type="."submit".">ver</button>
+                            </form>
+                        </div>
+                    </div>
+                ";
+            }
+        ?>
+    </div>
     
 </body>
 </html>

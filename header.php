@@ -20,9 +20,18 @@
             <nav class="nav">    
                 <div class="row">
                     <div class="col">
-                        <a href="./apartamentos.php">Apartamentos</a>
-                        <a href="./casas.php">Casas</a>
-                        <a href="./terrenos.php">Terrenos</a>
+                        <form action="./landing_page.php" method="POST" id="casas">
+                            <input type="text" name="propiedad" value="casas" hidden>
+                            <button class="btn btn-primary" type="submit">Casas</button>
+                        </form>
+                        <form action="./landing_page.php" method="POST" id="apartamentos">
+                            <input type="text" name="propiedad" value="apartamento" hidden>
+                            <button class="btn btn-primary" type="submit">Apartamentos</button>
+                        </form>
+                        <form action="./landing_page.php" method="POST" id="terrenos">
+                            <input type="text" name="propiedad" value="terrenos" hidden>
+                            <button class="btn btn-primary" type="submit">Terrenos</button>
+                        </form>
                         <button onclick="location.href='./perfil.php'">
                             <img src="assets/perfil.svg" alt="X">
                         </button>
