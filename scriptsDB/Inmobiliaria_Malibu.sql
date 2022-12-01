@@ -75,7 +75,7 @@ CREATE TABLE inmobiliaria_malibu.Invoice(
     FOREIGN KEY (`id_properties`) REFERENCES `properties`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = InnoDB;
 
-SELECT * FROM properties;
+SELECT * FROM users;
 -- ALTER TABLE type_properties  MODIFY `type` VARCHAR(11) NOT NULL;
 -- ALTER TABLE properties  MODIFY `designe` VARCHAR(200);
 -- DROP DATABASE inmobiliaria_malibu;

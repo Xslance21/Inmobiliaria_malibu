@@ -15,6 +15,11 @@
         $libro = $consulta->fetch(PDO::FETCH_ASSOC);
 
         $_SESSION['id_user'] = $libro['id'];
+    }else{
+        echo "<script> alert('No has iniciado sesión.');
+            window.location.href='./login.php'</script>";
+        session_unset();
+        session_destroy();
     }
 ?>
 <!DOCTYPE html>

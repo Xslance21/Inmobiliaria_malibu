@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +31,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <button onclick="location.href=''">Salir</button>
+                <button onclick="location.href='./logout.php'">Salir</button>
             </div>
         </div>
     </div>

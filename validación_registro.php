@@ -16,13 +16,29 @@
         $cellphone = $_POST['cellphone'];
         $name = $_POST['name'];
         $document = $_POST['document'];
+        $usuarioregistrado = false;
 
         $username = htmlspecialchars($username);
         $password = htmlspecialchars($password);
 
         $email_exp = "/^[A-z0-9\\._-]+@/";
 
-        if(!preg_match($email_exp,$email)){
+        $consulta = $connection->prepare("SELECT `username` FROM `users`;");
+
+        $consulta->execute(); 
+
+        $user_fetch = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($user_fetch as $x => $x_values){
+            if($x_values['username'] == $username){
+                $usuarioregistrado = true;
+            }
+        }
+        if($usuarioregistrado){
+            echo "<script> alert('Este nombre de ususario ya esta registrado');
+            window.location.href='./registro.php'</script>"; 
+        }
+        elseif(!preg_match($email_exp,$email)){
             echo "<script> alert('El correo no es valido');
             window.location.href='./registro.php'</script>";
         }elseif(!preg_match("/[0-9]\d{9}/",$cellphone)){
@@ -54,6 +70,3 @@
         session_unset();
         session_destroy();
     }
-
-
-?>
