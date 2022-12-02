@@ -30,7 +30,7 @@
                         </form>
                         <form action="./landing_page.php" method="POST" id="terrenos">
                             <input type="text" name="propiedad" value="terrenos" hidden>
-                            <button class="btn btn-primary" type="submit">Terrenos</button>
+                            <button class="btn btn-primary" type="submit">Terrenos </button>
                         </form>
                         <button onclick="location.href='./perfil.php'">
                             <img src="assets/perfil.svg" alt="X">

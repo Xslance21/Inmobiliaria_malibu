@@ -48,6 +48,10 @@
                 <p>Medidas: <?php echo $propiedad['measures'] ?></p>
                 <p>Diseño: <?php echo $propiedad['designe'] ?></p>
                 <p>Precio: $<?php echo $propiedad['price'] ?></p>
+                <form action="./carrito.php" method="POST">
+                    <input type="text" name="id" value="<?php echo $propiedad['id'] ?>" hidden>
+                    <button class="btn btn-primary" type="submit">Agregar al carrito</button> 
+                </form>
             </div>
         </div>
     </div>

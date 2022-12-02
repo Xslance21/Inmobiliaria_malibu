@@ -1,3 +1,28 @@
+<?php
+    session_start();
+
+    require("./dbconection.php");
+
+    $db = new database();
+
+    $connection = $db->connect();
+
+    if(empty($_SESSION['username']) and empty($_SESSION['pass'])){
+        echo "<script> alert('No has iniciado sesión.');
+            window.location.href='./login.php'</script>";
+        session_unset();
+        session_destroy();
+    }else{
+        $consulta = $connection->prepare("SELECT * FROM `users` WHERE `id`= ?");
+        $consulta->execute([$_SESSION['id_user']]);
+
+        $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
+    }
+
+    
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,39 +38,44 @@
         require_once("./header.php")
     ?>
     <div class="container">
-        <form action="./validación_registro.php" method="post">
+        <form action="./validación_modificar.php" method="post">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Username" name="username">
+                    <input class="form-control" type="text" name="id" value="<?php echo $usuario['id'] ?>"  hidden>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="password" placeholder="Password" name="password" id="pass">
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="password" placeholder="Confirm_Password" onchange="confirmacion()" id="pass_2"> 
+                    <input class="form-control" type="text" name="username" value="<?php echo $usuario['username'] ?>" disabled readonly>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Email" name="email">
+                    <input class="form-control" type="password" name="password" id="pass" value="<?php echo $usuario['password'] ?>">
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
+                    <input class="form-control" type="password" onchange="confirmacion()" id="pass_2" value="<?php echo $usuario['password'] ?>"> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
+                    <input class="form-control" type="text" name="email" value="<?php echo $usuario['email'] ?>">
                 </div>    
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Cellphone" name="cellphone">
+                    <input class="form-control" type="text" name="cellphone" value="<?php echo $usuario['cellphone'] ?>">
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Name" name="name">
+                    <input class="form-control" type="text" name="name" value="<?php echo $usuario['name'] ?>" >
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <input class="form-control" type="text" placeholder="Document" name="document">
+                    <input class="form-control" type="text" name="document" value="<?php echo $usuario['document'] ?>">
                 </div>
             </div>
             <div>
                 <button class="btn btn-primary mt-3" type="submit">Modificar</button>
-                <input class="btn btn-primary mt-3" type="submit" onclick="this.form.action='login.php'" value="Cancelar">
+                <input class="btn btn-primary mt-3" type="submit" onclick="this.form.action='./landing_page.php'" value="Cancelar">
             </div>
         </form>
     </div>
