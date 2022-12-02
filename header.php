@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style_header.css">
+    <link rel="stylesheet" type="text/css" href="./style_header.css">
     <title>header</title>
 </head>
 <body>
@@ -17,25 +17,33 @@
                     <h1>Inmobliaria Malibu</h1>
                 </div>
             </div>
-            <nav class="nav">    
+            <nav>    
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm-12 col-md-2 col-lg-2 d-inline">
                         <form action="./landing_page.php" method="POST" id="casas">
                             <input type="text" name="propiedad" value="casas" hidden>
-                            <button class="btn btn-primary" type="submit">Casas</button>
+                            <button class="btn" id="bh1" type="submit">Casas</button>
                         </form>
+                    </div>
+                    <div class="col-sm-12 col-md-2 col-lg-2 d-inline">
                         <form action="./landing_page.php" method="POST" id="apartamentos">
                             <input type="text" name="propiedad" value="apartamento" hidden>
-                            <button class="btn btn-primary" type="submit">Apartamentos</button>
+                            <button class="btn" id="bh2" type="submit">Apartamentos</button>
                         </form>
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-lg-2 d-inline">
                         <form action="./landing_page.php" method="POST" id="terrenos">
                             <input type="text" name="propiedad" value="terrenos" hidden>
-                            <button class="btn btn-primary" type="submit">Terrenos </button>
+                            <button class="btn" id="bh3" type="submit">Terrenos </button>
                         </form>
-                        <button onclick="location.href='./perfil.php'">
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-lg-2 d-inline">
+                        <button class="btn" onclick="location.href='./perfil.php'">
                             <img src="assets/perfil.svg" alt="X">
                         </button>
-                        <button onclick="location.href='./carrito.php'">
+                    </div> 
+                    <div class="col-sm-2 col-md-2 col-lg-2 d-inline">
+                        <button class="btn" onclick="location.href='./carrito.php'">
                             <img src="assets/carrito.svg" alt="X">
                         </button>
                     </div>

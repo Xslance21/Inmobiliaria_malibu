@@ -69,13 +69,13 @@
                 $total_carrito += $propiedad['price'];
     
                 echo ("
-                    <div class='row'>
-                        <div class='col'>
-                            <img src='".$propiedad['image_1']."' alt='X'>
+                    <div class='row my-5'>
+                        <div class='col-sm-6 col-md-6 col-lg-6 '>
+                            <img class='img-fluid' src='".$propiedad['image_1']."' alt='X'>
                         </div>
-                        <div class='col'>
+                        <div class='col-sm-6 col-md-6 col-lg-6'>
                             <h2>Propietario: ".$propiedad['name']."</h2>
-                            <h2>Precio: ".$propiedad['price']."</h2>
+                            <h2>Precio: \$".$propiedad['price']."</h2>
                         </div>
                     </div>
                 ");
@@ -97,7 +97,7 @@
     ?>
         <div class="row">
             <div class="col">
-                <button onclick="location.href='./invoice.php'">
+                <button class="btn btn-primary" onclick="location.href='./invoice.php'">
                     Finalizar compra
                 </button>
                 <input class="btn btn-primary" type="submit" onclick="location.href='landing_page.php'" value="Regresar">

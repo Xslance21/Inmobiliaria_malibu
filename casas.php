@@ -36,9 +36,9 @@
         require_once("./header.php")
     ?>
     <div class="container">
-        <div class="row">
+        <div class="row my-5">
             <div class="col">
-                <?php echo"<img class="."img-fluid"." src=".$propiedad['image_1']." alt="."Not found".">"; ?>
+                <?php echo"<img class='img-fluid' src=".$propiedad['image_1']." alt="."Not found".">"; ?>
             </div>
             <div class="col">
                 <p>Propietario: <?php echo $propiedad['id_users'] ?></p>

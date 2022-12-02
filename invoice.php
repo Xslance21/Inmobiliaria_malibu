@@ -59,14 +59,15 @@
                 $fecha = $consulta_2->fetch(PDO::FETCH_ASSOC);
 
                 echo ("
-                <div class='row'>
-                    <div class='col'>
-                        <img src='".$propiedad['image_1']."' alt='X'>
+                <div class='row my-5'>
+                    <div class='col-sm-6 col-md-6 col-lg-6'>
+                        <img class='img-fluid' src='".$propiedad['image_1']."' alt='X'>
                     </div>
-                    <div class='col'>
-                        <h2>Propietario: ".$propiedad['name']."</h2>
-                        <h2>Precio: ".$propiedad['price']."</h2>
-                        <h2>Fecha: ".$fecha['date']."</h2>
+                    <div class='col-sm-6 col-md-6 col-lg-6'>
+                        <h2>Factura</h2>
+                        <h2>Nuevo propietario: ".$propiedad['name']."</h2>
+                        <h2>Precio de compra: \$".$propiedad['price']."</h2>
+                        <h2>Fecha de compra: ".$fecha['date']."</h2>
                     </div>
                 </div>
                 ");

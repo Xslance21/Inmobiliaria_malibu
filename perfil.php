@@ -16,25 +16,25 @@
     <?php
         require_once("./header.php")
     ?>
-    <div class="container">
+    <div class="container ">
         <div class="row">
             <div class="col">
-                <button onclick="location.href='./modificar_perfil.php'">Modificar perfil</button>
+                <button class="btn btn-primary mt-3 " onclick="location.href='./modificar_perfil.php'">Modificar perfil</button>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <button onclick="location.href='eliminar_perfil.php'">Eliminar cuenta</button>
+                <button class="btn btn-primary mt-3 " onclick="location.href='eliminar_perfil.php'">Eliminar cuenta</button>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <button onclick="location.href='landing_page.php'">Regresar</button>
+                <button class="btn btn-primary mt-3 " onclick="location.href='landing_page.php'">Regresar</button>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <button onclick="location.href='./logout.php'">Salir</button>
+                <button class="btn btn-primary mt-3 " onclick="location.href='./logout.php'">Salir</button>
             </div>
         </div>
     </div>

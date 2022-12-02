@@ -73,7 +73,7 @@
             foreach($propiedades as $x => $x_values){
                 echo 
                 "
-                    <div class="."row".">
+                    <div class='row my-5'>
                         <div class="."col".">
                             <img class="."img-fluid"." src=".$x_values['image_1']." alt="."Null".">
                         </div>
@@ -83,7 +83,7 @@
                             <h2>Precio: \$".$x_values['price']."</h2>
                             <form action="."./casas.php"." method="."POST".">
                                 <input name="."id_propiedad"." value=".$x_values['id']." hidden>
-                                <button class="."btn btn-primary"." type="."submit".">ver</button>
+                                <button class='btn btn-primary' type="."submit".">ver</button>
                             </form>
                         </div>
                     </div>
