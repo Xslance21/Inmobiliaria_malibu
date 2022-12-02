@@ -21,6 +21,13 @@
         session_unset();
         session_destroy();
     }
+
+    if(isset($_POST['eliminarcarrito'])){
+        if($_POST['eliminarcarrito'] == "eliminar"){
+            unset($_SESSION['carrito']);
+        }
+    }
+
     if(isset($_POST['propiedad'])){
         switch($_POST['propiedad']){
             case "casas":

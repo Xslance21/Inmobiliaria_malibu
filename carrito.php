@@ -7,13 +7,38 @@
 
     $connection = $db->connect();
 
-    if(isset($_SESSION['carrito'])){
-        $id = array($_POST['id']);
-        $_SESSION['carrito'] = array_merge($_SESSION['carrito'],$id);
+    
+    if(empty($_SESSION['username']) and empty($_SESSION['pass'])){
+        echo "<script> alert('No has iniciado sesión.');
+            window.location.href='./login.php'</script>";
+        session_unset();
+        session_destroy();
+    }
 
+    if(isset($_SESSION['carrito'])){
+        if(isset($_POST['id'])){
+            $id = array($_POST['id']);
+            $repetido = false;
+            foreach($id as $key_id => $value_id){
+                foreach($_SESSION['carrito'] as $key_carrito => $value_carrito){
+                    if($value_carrito == $value_id){
+                        echo "<script> alert('Esta propiedad ya estaba en el carrito.');</script>";
+                        $repetido = true;
+                        break;
+                    }else{
+                        $repetido=false;
+                    }
+                }
+            }
+            if(!$repetido){
+                $_SESSION['carrito'] = array_merge($_SESSION['carrito'],$id);
+            }
+        }
     }else{
-        $id = array($_POST['id']);
-        $_SESSION['carrito'] = $id;        
+        if(isset($_POST['id'])){
+            $id = array($_POST['id']);
+            $_SESSION['carrito'] = $id; 
+        }       
     }
 
 
@@ -35,41 +60,47 @@
     <div class='container'>
     <?php
         $total_carrito = 0;
-        foreach($_SESSION['carrito'] as $key_carrito => $value_carrito){
-            $consulta = $connection->prepare("SELECT `properties`.`image_1`, `properties`.`price`, `users`.`name` FROM `properties` INNER JOIN `users` ON `properties`.`id_users` = `users`.`id` WHERE `properties`.`id`= ? ");
-            $consulta->execute([$value_carrito]);
-            $propiedad = $consulta->fetch(PDO::FETCH_ASSOC);
-            
-            $total_carrito += $propiedad['price'];
-
+        if(isset($_SESSION['carrito'])){
+            foreach($_SESSION['carrito'] as $key_carrito => $value_carrito){
+                $consulta = $connection->prepare("SELECT `properties`.`image_1`, `properties`.`price`, `users`.`name` FROM `properties` INNER JOIN `users` ON `properties`.`id_users` = `users`.`id` WHERE `properties`.`id`= ? ");
+                $consulta->execute([$value_carrito]);
+                $propiedad = $consulta->fetch(PDO::FETCH_ASSOC);
+                
+                $total_carrito += $propiedad['price'];
+    
+                echo ("
+                    <div class='row'>
+                        <div class='col'>
+                            <img src='".$propiedad['image_1']."' alt='X'>
+                        </div>
+                        <div class='col'>
+                            <h2>Propietario: ".$propiedad['name']."</h2>
+                            <h2>Precio: ".$propiedad['price']."</h2>
+                        </div>
+                    </div>
+                ");
+    
+    
+            }
+    
             echo ("
                 <div class='row'>
                     <div class='col'>
-                        <img src='".$propiedad['image_1']."' alt='X'>
-                    </div>
-                    <div class='col'>
-                        <h2>Propietario: ".$propiedad['name']."</h2>
-                        <h2>Precio: ".$propiedad['price']."</h2>
-                    </div>
+                        <h2>Total: ".$total_carrito."</h2>
+                    </div>        
                 </div>
             ");
-
-
         }
-
-        echo ("
-            <div class='row'>
-                <div class='col'>
-                    <h2>Total: ".$total_carrito."</h2>
-                </div>        
-            </div>
-        ");
+        else{
+            ECHO"<h1>No hay nada en el carrito</h1>";
+        }
     ?>
         <div class="row">
             <div class="col">
                 <button onclick="location.href='./invoice.php'">
                     Finalizar compra
                 </button>
+                <input class="btn btn-primary" type="submit" onclick="location.href='landing_page.php'" value="Regresar">
             </div>
         </div>
     </div>

@@ -27,11 +27,11 @@
                 <button onclick="location.href='eliminar_perfil.php'">Eliminar cuenta</button>
             </div>
         </div>
-        <!-- <div class="row">
+        <div class="row">
             <div class="col">
-                <button onclick="location.href=''">Regresar</button>
+                <button onclick="location.href='landing_page.php'">Regresar</button>
             </div>
-        </div> -->
+        </div>
         <div class="row">
             <div class="col">
                 <button onclick="location.href='./logout.php'">Salir</button>

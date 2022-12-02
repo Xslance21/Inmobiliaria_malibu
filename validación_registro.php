@@ -8,6 +8,8 @@
 
     $connection = $db->connect();
 
+    
+
     if(isset($_POST['username']) and isset($_POST['password']) and isset($_POST['email']) and isset($_POST['cellphone']) and isset($_POST['name']) and isset($_POST['document'])){
 
         $username = $_POST['username'];
