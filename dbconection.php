@@ -1,10 +1,10 @@
 <?php
     class database
     {
-        private $host = "localhost";
+        private $host = "127.0.0.1";
         private $dbname = "inmobiliaria_malibu";
         private $username = "root";
-        private $password = "Blue1216";
+        private $password = "";
         private $charset = "utf8";
 
         public function connect(){

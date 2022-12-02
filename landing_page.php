@@ -24,20 +24,20 @@
     if(isset($_POST['propiedad'])){
         switch($_POST['propiedad']){
             case "casas":
-                $_SESSION['type'] = 4;
+                $_SESSION['type'] = 1;
                 break;
             case "apartamento":
-                $_SESSION['type'] = 5;
+                $_SESSION['type'] = 2;
                 break;
             case "terrenos":
-                $_SESSION['type'] = 6;
+                $_SESSION['type'] = 3;
                 break;
             default:
                 echo "nada";
                 break; 
         }
     }else{
-        $_SESSION['type'] = 4;
+        $_SESSION['type'] = 1;
     }
 
     if(isset($_SESSION['type'])){
