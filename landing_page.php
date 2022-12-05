@@ -9,7 +9,7 @@
 
     if(isset($_SESSION['username']) and isset($_SESSION['pass'])){
         $username = $_SESSION['username'];
-        $consulta = $connection->prepare("SELECT `id` FROM `users` WHERE `username` = ?");
+        $consulta = $connection->prepare("SELECT `id` FROM `Users` WHERE `username` = ?");
         $consulta->execute([$username]);
 
         $libro = $consulta->fetch(PDO::FETCH_ASSOC);
@@ -17,7 +17,7 @@
         $_SESSION['id_user'] = $libro['id'];
     }else{
         echo "<script> alert('No has iniciado sesión.');
-            window.location.href='./login.php'</script>";
+            window.location.href='./index.php'</script>";
         session_unset();
         session_destroy();
     }
@@ -48,7 +48,7 @@
     }
 
     if(isset($_SESSION['type'])){
-        $consulta = $connection->prepare("SELECT `users`.`username`,`properties`.`price`,`properties`.`image_1`,`neighborhood`.`neighborhood`,`properties`.`id` FROM `properties` INNER JOIN `users` ON `properties`.`id_users` = `users`.`id` INNER JOIN `neighborhood` ON `properties`.`id_neighborhood` = `neighborhood`.`id` WHERE `id_type_properties` = ?");
+        $consulta = $connection->prepare("SELECT `Users`.`username`,`Properties`.`price`,`Properties`.`image_1`,`Neighborhood`.`neighborhood`,`Properties`.`id` FROM `Properties` INNER JOIN `Users` ON `Properties`.`id_users` = `Users`.`id` INNER JOIN `Neighborhood` ON `Properties`.`id_neighborhood` = `Neighborhood`.`id` WHERE `id_type_properties` = ?");
         $consulta->execute([$_SESSION['type']]);
         $propiedades = $consulta->fetchAll(PDO::FETCH_ASSOC);
     }   

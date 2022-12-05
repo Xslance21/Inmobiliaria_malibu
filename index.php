@@ -19,7 +19,7 @@
                 <img class="rounded img-fluid start" src="./images/login.jpg" alt="Not found" width="100%">
             </div>
             <div class="col-sm-7 col-md-7 col-lg-7">
-                <form action="./validación_login.php" method="post">
+                <form action="./validacion_login.php" method="post">
                     <input class="form-control mt-3" type="text" name="username" id="username" placeholder="Username">
                     <input class="form-control mt-3" type="password" name="pass" id="pass" placeholder="Password">
                     <button class="btn btn-primary mt-3" id="Ingresar" type="submit">Ingresar</button>

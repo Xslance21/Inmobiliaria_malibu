@@ -16,8 +16,8 @@
 
         $username = htmlentities($username);
         $password = htmlentities($password);
-
-        $consulta = $connection->prepare("SELECT * FROM `users`;");
+        
+        $consulta = $connection->prepare("SELECT * FROM Users;");
         $consulta->execute();
 
         $libro = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -37,10 +37,12 @@
             header("Location:landing_page.php");
         }else{
             echo"<script>alert('El nombre o la contraseña no coinciden con los registros del sistema');
-            window.location.href='login.php'</script>";
+            window.location.href='index.php'</script>";
         }
     }
     else{
+        echo"<script>alert('El nombre o la contraseña no coinciden con los registros del sistema');
+        window.location.href='index.php'</script>";
         session_unset();
         session_destroy();
     }

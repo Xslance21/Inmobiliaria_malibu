@@ -10,7 +10,7 @@
     
     if(empty($_SESSION['username']) and empty($_SESSION['pass'])){
         echo "<script> alert('No has iniciado sesión.');
-            window.location.href='./login.php'</script>";
+            window.location.href='./index.php'</script>";
         session_unset();
         session_destroy();
     }
@@ -40,6 +40,19 @@
             $_SESSION['carrito'] = $id; 
         }       
     }
+    
+    if(isset($_POST['eliminar'])){
+        // echo $_POST['eliminar'];
+        // echo "Sí está";
+        foreach($_SESSION['carrito'] as $x => $x_values){
+            if($x_values == $_POST['eliminar']){
+                $arreglo_tmp = $_SESSION['carrito'];
+                unset($arreglo_tmp[$x]);
+                $_SESSION['carrito'] = $arreglo_tmp;
+                break;
+            }
+        }
+    }
 
 
 ?>
@@ -58,48 +71,59 @@
         require_once("./header.php")
     ?>
     <div class='container'>
-    <?php
-        $total_carrito = 0;
-        if(isset($_SESSION['carrito'])){
-            foreach($_SESSION['carrito'] as $key_carrito => $value_carrito){
-                $consulta = $connection->prepare("SELECT `properties`.`image_1`, `properties`.`price`, `users`.`name` FROM `properties` INNER JOIN `users` ON `properties`.`id_users` = `users`.`id` WHERE `properties`.`id`= ? ");
-                $consulta->execute([$value_carrito]);
-                $propiedad = $consulta->fetch(PDO::FETCH_ASSOC);
-                
-                $total_carrito += $propiedad['price'];
-    
-                echo ("
-                    <div class='row my-5'>
-                        <div class='col-sm-6 col-md-6 col-lg-6 '>
-                            <img class='img-fluid' src='".$propiedad['image_1']."' alt='X'>
+        <?php
+            $total_carrito = 0;
+            if(isset($_SESSION['carrito'])){
+                foreach($_SESSION['carrito'] as $key_carrito => $value_carrito){
+                    $consulta = $connection->prepare("SELECT `Properties`.`image_1`, `Properties`.`price`, `Users`.`name` FROM `Properties` INNER JOIN `Users` ON `Properties`.`id_users` = `Users`.`id` WHERE `Properties`.`id`= ? ");
+                    $consulta->execute([$value_carrito]);
+                    $propiedad = $consulta->fetch(PDO::FETCH_ASSOC);
+                    
+                    $total_carrito += $propiedad['price'];
+        
+                    echo ("
+                        <div class='row my-5'>
+                            <div class='col-sm-6 col-md-6 col-lg-6 '>
+                                <img class='img-fluid' src='".$propiedad['image_1']."' alt='X'>
+                            </div>
+                            <div class='col-sm-6 col-md-6 col-lg-6'>
+                                <h2>Propietario: ".$propiedad['name']."</h2>
+                                <h2>Precio: \$".$propiedad['price']."</h2>
+                                <form action='./carrito.php' method='post'>
+                                    <input name='eliminar' value=".$value_carrito." hidden>
+                                    <button class='btn btn-primary' type='submit'>Eliminar</button> 
+                                </form>
+                            </div>
                         </div>
-                        <div class='col-sm-6 col-md-6 col-lg-6'>
-                            <h2>Propietario: ".$propiedad['name']."</h2>
-                            <h2>Precio: \$".$propiedad['price']."</h2>
+                    ");
+        
+        
+                }
+                if($total_carrito !=0){
+                    echo ("
+                        <div class='row'>
+                            <div class='col'>
+                                <h2>Total: \$".$total_carrito."</h2>
+                            </div>        
                         </div>
-                    </div>
-                ");
-    
-    
+                    ");
+                }
+                else{
+                    echo"<h1>No hay nada en el carrito</h1>";
+                }
             }
-    
-            echo ("
-                <div class='row'>
-                    <div class='col'>
-                        <h2>Total: ".$total_carrito."</h2>
-                    </div>        
-                </div>
-            ");
-        }
-        else{
-            ECHO"<h1>No hay nada en el carrito</h1>";
-        }
-    ?>
+            else{
+                echo"<h1>No hay nada en el carrito</h1>";
+            }
+        ?>
         <div class="row">
             <div class="col">
-                <button class="btn btn-primary" onclick="location.href='./invoice.php'">
-                    Finalizar compra
-                </button>
+                <form action="" method="POST">
+                    <input hidden name="borrar-carrito" value="eliminar">
+                    <button class="btn btn-primary" onclick="this.form.action='./invoice.php'">
+                        Finalizar compra
+                    </button>
+                </form>
                 <input class="btn btn-primary" type="submit" onclick="location.href='landing_page.php'" value="Regresar">
             </div>
         </div>

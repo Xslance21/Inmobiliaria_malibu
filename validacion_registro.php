@@ -25,7 +25,7 @@
 
         $email_exp = "/^[A-z0-9\\._-]+@/";
 
-        $consulta = $connection->prepare("SELECT `username` FROM `users`;");
+        $consulta = $connection->prepare("SELECT `username` FROM `Users`;");
 
         $consulta->execute(); 
 
@@ -46,14 +46,14 @@
         }elseif(!preg_match("/[0-9]\d{9}/",$cellphone)){
             echo "<script> alert('El numero de telefono no es valido');
             window.location.href='./registro.php'</script>";
-        }elseif(!preg_match("/^[A-z]/",$name)){
+        }elseif(!preg_match("/^[A-z ]*$/",$name)){
             echo "<script> alert('El nombre no es valido');
             window.location.href='./registro.php'</script>";
         }elseif(!preg_match("/[0-9]\d{9}/",$document)){
             echo "<script> alert('El numero de documento no es valido');
             window.location.href='./registro.php'</script>";
         }else{
-            $consulta = $connection->prepare("INSERT INTO users(`name`,`document`,`cellphone`,`email`,`username`,`password`) VALUES (?,?,?,?,?,?);");
+            $consulta = $connection->prepare("INSERT INTO Users(`name`,`document`,`cellphone`,`email`,`username`,`password`) VALUES (?,?,?,?,?,?);");
 
             $resultado = $consulta->execute([$name,$document,$cellphone,$email,$username,$password]);
 

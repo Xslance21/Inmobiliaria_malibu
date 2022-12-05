@@ -9,7 +9,7 @@
 
     if(empty($_SESSION['username']) and empty($_SESSION['pass'])){
         echo "<script> alert('No has iniciado sesión.');
-            window.location.href='./login.php'</script>";
+            window.location.href='./index.php'</script>";
         session_unset();
         session_destroy();
     }
@@ -32,9 +32,9 @@
         <div class="row">
             <div class="col">
                 <h1>¿Estas seguro de quere borrar tu usuario?</h1>
-                <form action="./login.php" method="post">
+                <form action="./index.php" method="post">
                     <button class="btn btn-primary" type="submit" onclick="eliminar_cuenta()">Sí</button>
-                    <input type="submit" onclick="this.form.action='./landing_page.php'" value="Cancelar">
+                    <input class="btn btn-primary" type="submit" onclick="this.form.action='./landing_page.php'" value="Cancelar">
                 </form>
             </div>
         </div>
@@ -42,7 +42,7 @@
     <script>
         function eliminar_cuenta(){
             <?php
-                $consulta = $connection->prepare("DELETE FROM `users` WHERE `id`= ?");
+                $consulta = $connection->prepare("DELETE FROM `Users` WHERE `id`= ?");
                 $consulta->execute([$_SESSION['id_user']]);
             ?>
             alert('Se ha eliminado la cuenta con exito');

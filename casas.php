@@ -9,14 +9,14 @@
 
     if(empty($_SESSION['username']) and empty($_SESSION['pass'])){
         echo "<script> alert('No has iniciado sesión.');
-            window.location.href='./login.php'</script>";
+            window.location.href='./index.php'</script>";
         session_unset();
         session_destroy();
     }
 
     if(isset($_POST['id_propiedad'])){
 
-        $consulta = $connection->prepare("SELECT * FROM `properties` WHERE `id` = ?");
+        $consulta = $connection->prepare("SELECT * FROM `Properties` WHERE `id` = ?");
         $consulta->execute([$_POST['id_propiedad']]);
 
         $propiedad = $consulta->fetch(PDO::FETCH_ASSOC);

@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="./validación_registro.php" method="post">
+        <form action="./validacion_registro.php" method="post">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-3">
                     <input class="form-control" type="text" placeholder="Username" name="username">
@@ -42,7 +42,7 @@
             </div>
             <div>
                 <button class="btn btn-primary mt-3" type="submit">Registrarse.</button>
-                <input class="btn btn-primary mt-3" type="submit" onclick="this.form.action='login.php'" value="Cancelar">
+                <input class="btn btn-primary mt-3" type="submit" onclick="this.form.action='index.php'" value="Cancelar">
             </div>
         </form>
     </div>

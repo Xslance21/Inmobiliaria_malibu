@@ -22,18 +22,18 @@
 
             if(!preg_match($email_exp,$email)){
                 echo "<script> alert('El correo no es valido');
-                window.location.href='./registro.php'</script>";
+                window.location.href='./modificar_perfil.php'</script>";
             }elseif(!preg_match("/[0-9]\d{9}/",$cellphone)){
                 echo "<script> alert('El numero de telefono no es valido');
-                window.location.href='./registro.php'</script>";
-            }elseif(!preg_match("/^[A-z]/",$name)){
+                window.location.href='./modificar_perfil.php'</script>";
+            }elseif(!preg_match("/^[A-z ]*$/",$name)){
                 echo "<script> alert('El nombre no es valido');
-                window.location.href='./registro.php'</script>";
+                window.location.href='./modificar_perfil.php'</script>";
             }elseif(!preg_match("/[0-9]\d{9}/",$document)){
                 echo "<script> alert('El numero de documento no es valido');
-                window.location.href='./registro.php'</script>";
+                window.location.href='./modificar_perfil.php'</script>";
             }else{
-                $consulta = $connection->prepare("UPDATE `users` SET `name`= ?, `document`= ?, `cellphone`= ?, `email`= ?, `password`= ? WHERE `id`= ?;");
+                $consulta = $connection->prepare("UPDATE `Users` SET `name`= ?, `document`= ?, `cellphone`= ?, `email`= ?, `password`= ? WHERE `id`= ?;");
 
                 $resultado = $consulta->execute([$name,$document,$cellphone,$email,$password,$id]);
 

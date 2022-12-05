@@ -6,10 +6,18 @@
     $db = new database();
 
     $connection = $db->connect();
+    
+    if(isset($_POST['eliminarcarrito'])){
+        if($_POST['eliminarcarrito'] == "eliminar"){
+            unset($_SESSION['carrito']);
+            unset($_POST['eliminarcarrito']);
+            header("Location:landing_page.php");
+        }
+    }
 
     if(empty($_SESSION['username']) and empty($_SESSION['pass'])){
         echo "<script> alert('No has iniciado sesión.');
-            window.location.href='./login.php'</script>";
+            window.location.href='./index.php'</script>";
         session_unset();
         session_destroy();
     }
@@ -38,23 +46,23 @@
             $id_user = $_SESSION['id_user'];
 
             foreach($_SESSION['carrito'] as $key_carrito => $value_carrito){
-                $consulta = $connection->prepare("UPDATE `properties` SET `id_users` = ? WHERE `id` = ?");
+                $consulta = $connection->prepare("UPDATE `Properties` SET `id_users` = ? WHERE `id` = ?");
                 $consulta->execute([$id_user,$value_carrito]);
                 
             }
 
             foreach($_SESSION['carrito'] as $key_carrito => $value_carrito){
-                $consulta = $connection->prepare("INSERT INTO `invoice`(`id_users`, `id_properties`, `date`) VALUES (?,?,CURDATE())");
+                $consulta = $connection->prepare("INSERT INTO `Invoice`(`id_users`, `id_Properties`, `date`) VALUES (?,?,CURDATE())");
                 $consulta->execute([$id_user,$value_carrito]);
                 
             }
 
             foreach($_SESSION['carrito'] as $key_carrito => $value_carrito){
-                $consulta = $connection->prepare("SELECT `properties`.`image_1`, `properties`.`price`, `users`.`name` FROM `properties` INNER JOIN `users` ON `properties`.`id_users` = `users`.`id` WHERE `properties`.`id`= ? ");
+                $consulta = $connection->prepare("SELECT `Properties`.`image_1`, `Properties`.`price`, `Users`.`name` FROM `Properties` INNER JOIN `Users` ON `Properties`.`id_users` = `Users`.`id` WHERE `Properties`.`id`= ? ");
                 $consulta->execute([$value_carrito]);
                 $propiedad = $consulta->fetch(PDO::FETCH_ASSOC);
 
-                $consulta_2 = $connection->prepare("SELECT `date` FROM `invoice` WHERE `id_properties` = ?");
+                $consulta_2 = $connection->prepare("SELECT `date` FROM `Invoice` WHERE `id_Properties` = ?");
                 $consulta_2->execute([$value_carrito]);
                 $fecha = $consulta_2->fetch(PDO::FETCH_ASSOC);
 
@@ -76,13 +84,17 @@
     ?>
         <div class="row">
             <div class="col">
-                <form action="" method="POST">
-                    <input type="text" name="eliminarcarrito" value="eliminar" hidden>
-                    <button class="btn btn-primary" type="submit" onclick="this.form.action='landing_page.php'">Regresar.</button>
-                </form>
+                <button class="btn btn-primary" onclick="location.href='landing_page.php'">Regresar.</button>
             </div>
         </div>
     </div>
+    <?php
+        if(isset($_POST['borrar-carrito'])){
+            if($_POST['borrar-carrito'] == "eliminar"){
+                unset($_SESSION['carrito']);
+            }    
+        }
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
